@@ -1,0 +1,53 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.10.RELEASE'
+        kotlinVersion = '1.2.21'
+
+        kotlinJacksonVersion = '2.9.4'
+        graphiqlVersion = '3.10.0'
+        graphqlVersion = '7.0'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion"
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'kotlin-spring'
+apply plugin: 'kotlin'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+version = '0.0.1-SNAPSHOT'
+group = 'com.edd.graphql'
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:$kotlinJacksonVersion"
+    compile "com.graphql-java:graphiql-spring-boot-starter:$graphiqlVersion"
+    compile "com.graphql-java:graphql-java:$graphqlVersion"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.5.1'
+}
